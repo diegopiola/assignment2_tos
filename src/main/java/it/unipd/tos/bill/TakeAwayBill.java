@@ -30,18 +30,29 @@ public class TakeAwayBill implements TakeAwayBillInterface
         double min = Double.MAX_VALUE;
         double discount = 0.00;
         int n_gelati = 0;
+        double totGelatiandBudini = 0.0;
+
         for (MenuItem item : orderList)
         {
             totalPrice += item.getPrice();
             if(item.getType() == ItemType.Gelati) {
                 n_gelati++;
+                totGelatiandBudini+= item.getPrice();
                 if (item.getPrice() < min) {
                     min = item.getPrice();
                 }
             }
+            if(item.getType() == ItemType.Budini)
+            {
+                totGelatiandBudini+= item.getPrice();
+            }
         }
         if(n_gelati>5){
-            discount = min/2.00;}
+            discount += min/2.00;}
+        if(totGelatiandBudini>50.00)
+        {
+            discount+=((totalPrice/100.00)*10);
+        }
         return totalPrice - discount;
     }
 

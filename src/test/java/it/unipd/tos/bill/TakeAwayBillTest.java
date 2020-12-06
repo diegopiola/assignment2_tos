@@ -139,4 +139,39 @@ public class TakeAwayBillTest
         assertEquals(6.50,order.getOrderPrice(items,new User(2,"Diego","Piola",21)),0.00);
     }
 
+    @Test
+    public void verifyGratis() throws RestaurantBillException
+    {
+        List<TakeAwayBill> orders;
+        List<MenuItem> orderListGratis;
+
+        orders = new ArrayList<>();
+        orderListGratis = new ArrayList<>();
+        for (int i = 0; i < 6; ++i) {
+            MenuItem m = new MenuItem(ItemType.Gelati, "Banana", 4.00);
+            MenuItem b = new MenuItem(ItemType.Budini, "merda", 10.00);
+            orderListGratis.add(m);
+            orderListGratis.add(b);
+        }
+        String [] names = {"Diego","Paolo","Jonny","Riccardo","Giulia","Sara","Michele","Stefano","Agnese","Pietro","Stefania","Alberto"};
+        String [] surnames = {"Piola","Sassata","Sega","Tallone","Boh","Porca","Pressing","Tzuje","Figa","Pollo","Santa","Manigoldo"};
+        for (int j = 0; j < 12; ++j)
+        {
+            User tmp = new User(j,names[j],surnames[j],17-j);
+            TakeAwayBill orderG = new TakeAwayBill(orderListGratis,tmp,68000+j);
+            orders.add(orderG);
+        }
+        //verifico che siano 10
+
+        assertEquals(10, orders.get(0).gratisOrder(orders).size());
+
+        List<TakeAwayBill> tmp = orders.get(0).gratisOrder(orders);
+        //verifico che il prezzo sia a 0 per tutti gli ordini, iè tutti uguai, ne vardo uno
+
+            //metto 0.5 perchè cè il sovraprezzo in caso non si spendano almeno 10 euro 
+            for(int i=0;i< tmp.size();++i) {
+                assertEquals(0.50, tmp.get(i).getOrderPrice(tmp.get(i).getLista(), tmp.get(i).getUser()), 0);
+            }
+    }
+
 }

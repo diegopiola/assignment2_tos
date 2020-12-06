@@ -32,6 +32,12 @@ public class TakeAwayBill implements TakeAwayBillInterface
         int n_gelati = 0;
         double totGelatiandBudini = 0.0;
 
+        if(orderList.size()>30)
+        {
+            throw new RestaurantBillException(
+                    "Non è possibile ordinare più di 30 elementi!");
+        }
+
         for (MenuItem item : orderList)
         {
             totalPrice += item.getPrice();

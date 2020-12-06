@@ -30,8 +30,9 @@ public class TakeAwayBillTest
         //istanzio test per il totale
         listTotal = new ArrayList<>();
         MenuItem x = new MenuItem(ItemType.Gelati,"banana",2.00);
-        listTotal.add(x);
-        listTotal.add(x);
+        for(int i=0;i<5;++i) {
+            listTotal.add(x);
+        }
         totalTest = new TakeAwayBill(listTotal,new User(1,"Diego","Piola",21),0);
         //istanzio test per lo sconto del 50% sul gelato meno caro
         list6Gelati = new ArrayList<>();
@@ -71,7 +72,7 @@ public class TakeAwayBillTest
     @Test
     public void getTotalTest() throws RestaurantBillException
     {
-        assertEquals(4.00,totalTest.getOrderPrice(listTotal, totalTest.getUser()),0.00);
+        assertEquals(10.00,totalTest.getOrderPrice(listTotal, totalTest.getUser()),0.00);
     }
 
     @Test
@@ -124,6 +125,18 @@ public class TakeAwayBillTest
         );
         TakeAwayBill order = new TakeAwayBill(items, new User(-1, "Test", "Sas",20),0);
         order.getOrderPrice(items,new User(-1, "Test", "Sas",20));
+    }
+
+    @Test
+    public void testCommission() throws RestaurantBillException
+    {
+        var items = List.of(
+                new MenuItem(ItemType.Gelati, "gelato 1", 1.00),
+                new MenuItem(ItemType.Gelati, "gelato 2", 2.00),
+                new MenuItem(ItemType.Gelati, "gelato 3", 3.00)
+        );
+        TakeAwayBill order = new TakeAwayBill(items,new User(2,"Diego","Piola",21),0);
+        assertEquals(6.50,order.getOrderPrice(items,new User(2,"Diego","Piola",21)),0.00);
     }
 
 }

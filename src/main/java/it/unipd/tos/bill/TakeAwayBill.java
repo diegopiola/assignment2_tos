@@ -59,6 +59,10 @@ public class TakeAwayBill implements TakeAwayBillInterface
         {
             discount+=((totalPrice/100.00)*10);
         }
+        if(totalPrice<10.00)
+        {
+            discount-=0.50;
+        }
         return totalPrice - discount;
     }
 

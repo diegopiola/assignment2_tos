@@ -33,10 +33,12 @@ public class TakeAwayBill implements TakeAwayBillInterface
         for (MenuItem item : orderList)
         {
             totalPrice += item.getPrice();
-            if(item.getType() == ItemType.Gelati){
-                n_gelati++;}
-            if(item.getPrice() < min){
-                min = item.getPrice();}
+            if(item.getType() == ItemType.Gelati) {
+                n_gelati++;
+                if (item.getPrice() < min) {
+                    min = item.getPrice();
+                }
+            }
         }
         if(n_gelati>5){
             discount = min/2.00;}

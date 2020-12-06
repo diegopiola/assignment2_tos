@@ -27,10 +27,20 @@ public class TakeAwayBill implements TakeAwayBillInterface
     public double getOrderPrice(List<MenuItem> orderList, User user)
             throws RestaurantBillException {
         double totalPrice = 0.0;
-        for (MenuItem item : orderList) {
+        double min = Double.MAX_VALUE;
+        double discount = 0.00;
+        int n_gelati = 0;
+        for (MenuItem item : orderList)
+        {
             totalPrice += item.getPrice();
+            if(item.getType() == ItemType.Gelati){
+                n_gelati++;}
+            if(item.getPrice() < min){
+                min = item.getPrice();}
         }
-        return totalPrice;
+        if(n_gelati>5){
+            discount = min/2.00;}
+        return totalPrice - discount;
     }
 
     public List<MenuItem> getLista()

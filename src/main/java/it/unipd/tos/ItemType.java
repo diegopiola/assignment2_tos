@@ -2,15 +2,5 @@
 // DIEGO PIOLA 1193414
 ////////////////////////////////////////////////////////////////////
 package it.unipd.tos;
-
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
-}
+/*Enum per distinguere il tipo di oggetto*/
+public enum ItemType {Gelati,Budini,Bevande}

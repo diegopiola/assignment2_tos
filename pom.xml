@@ -85,6 +85,13 @@
 				<configuration>
 					<sourceEncoding>UTF-8</sourceEncoding>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>javax.xml.bind</groupId>
+						<artifactId>jaxb-api</artifactId>
+						<version>2.2.3</version>
+					</dependency>
+				</dependecies>
 			</plugin>
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
